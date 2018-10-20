@@ -18,7 +18,7 @@ function renderCart() {
   showCart();
 }
 
-// TODO: Remove all of the rows (tr) in the cart table (tbody)
+// Remove all of the rows (tr) in the cart table (tbody)
 function clearCart() {
   var existingTableRows = document.querySelectorAll('#cart tbody tr');
 
@@ -29,25 +29,49 @@ function clearCart() {
   }
 }
 
-// TODO: Fill in the <tr>'s under the <tbody> for each item in the cart
+// Fill in the <tr>'s under the <tbody> for each item in the cart
 function showCart() {
 
-  // TODO: Find the table body
+  // Find the table body
   var tableBody = document.querySelector('#cart tbody');
 
-  // TODO: Iterate over the items in the cart
-  // TODO: Create a TR
-  // TODO: Create a TD for the delete link, quantity,  and the item
-  // TODO: Add the TR to the TBODY and each of the TD's to the TR
+  // Iterate over the items in the cart
+  for (var i in cart.items) {
+    // Create a TR
+    var tr = document.createElement('tr');
 
+    // Create a TD for the delete link, quantity,  and the item
+    var deleteTD = document.createElement('td');
+    deleteTD.textContent = 'x';
+    deleteTD.classList.add('deleter');
+    deleteTD.id = i;
+
+    var quantityTD = document.createElement('td');
+    quantityTD.textContent = cart.items[i].quantity;
+
+    var itemTD = document.createElement('td');
+    itemTD.textContent = cart.items[i].product;
+
+    // Add the TR to the TBODY and each of the TD's to the TR
+    tableBody.appendChild(tr);
+
+    tr.appendChild(deleteTD);
+    tr.appendChild(quantityTD);
+    tr.appendChild(itemTD);
+  }
 }
 
 function removeItemFromCart(event) {
+  if (event.target.classList.contains('deleter')) {
+    // When a delete link is clicked, use cart.removeItem to remove the correct item
+    cart.removeItem(parseInt(event.target.id));
 
-  // TODO: When a delete link is clicked, use cart.removeItem to remove the correct item
-  // TODO: Save the cart back to local storage
-  // TODO: Re-draw the cart table
+    // Save the cart back to local storage
+    cart.saveToLocalStorage();
 
+    // Re-draw the cart table
+    renderCart();
+  }
 }
 
 // This will initialize the page and draw the cart on screen
