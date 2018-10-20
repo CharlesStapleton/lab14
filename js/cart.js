@@ -19,12 +19,21 @@ function renderCart() {
 }
 
 // TODO: Remove all of the rows (tr) in the cart table (tbody)
-function clearCart() {}
+function clearCart() {
+  var existingTableRows = document.querySelectorAll('#cart tbody tr');
+
+  for (var i = 0; i <= existingTableRows.length; i++) {
+    if (existingTableRows[i]) {
+      existingTableRows[i].remove();
+    }
+  }
+}
 
 // TODO: Fill in the <tr>'s under the <tbody> for each item in the cart
 function showCart() {
 
   // TODO: Find the table body
+  var tableBody = document.querySelector('#cart tbody');
 
   // TODO: Iterate over the items in the cart
   // TODO: Create a TR
