@@ -31,26 +31,45 @@ function handleSubmit(event) {
   event.preventDefault();
   addSelectedItemToCart();
   cart.saveToLocalStorage();
-  cart.updateCounter();
+  updateCounter();
   updateCartPreview();
 }
 
 // TODO: Add the selected item and quantity to the cart
+// TODO: suss out the item picked from the select list
+// TODO: get the quantity
 function addSelectedItemToCart() {
-  var selectedItem = event.target.;
-  var selectedQuantity = ;
-  // TODO: suss out the item picked from the select list
-  // TODO: get the quantity
+  var selectedItem = event.target.items.value;
+  var selectedQuantity = event.target.quantity.value;
+  
   // TODO: using those, add one item to the Cart
+  console.log(selectedItem, selectedQuantity);
+  var currentItem = new CartItem(selectedItem, selectedQuantity);
+  cart.items.push(currentItem);
+  console.log(cart);
+}
+// TODO: Update the cart count in the header nav with the number of items in the Cart
+function updateCounter() {
+  var cartCount = document.getElementById('itemCount');
+  cartCount.textContent = cart.items.length;
 }
 
-// TODO: Update the cart count in the header nav with the number of items in the Cart
-function updateCounter() {}
+var cartContainer =document.getElementById('cartContents');
+var cartUL = document.createElement('ul');
+cartUL.textContent = 'Cart Preview';
+cartContainer.appendChild(cartUL);
+
 
 // TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
+// TODO: Get the item and quantity from the form
+// TODO: Add a new element to the cartContents div with that information
+
 function updateCartPreview() {
-  // TODO: Get the item and quantity from the form
-  // TODO: Add a new element to the cartContents div with that information
+  var selectedCartItem = event.target.items.value;
+  var selectedCartQuantity = event.target.quantity.value;
+  var cartLI = document.createElement('li');
+  cartLI.textContent = `item(s): ${selectedCartItem} quantity: ${selectedCartQuantity}`;
+  cartUL.appendChild(cartLI);
 }
 
 // Set up the "submit" event listener on the form.
