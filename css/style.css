@@ -2,3 +2,44 @@ img {
   max-width: 100px;
   max-height: 100px;
 }
+
+body{
+  background-color: lightgray;
+  font-family: sans-serif;
+  margin:auto;
+  width:960px;
+}
+/* nav  li {
+  list-style-type: none;
+  width:100%;
+  margin:30px;
+}
+nav li a {
+  float:left;
+  /* display: block;
+  height: 25px;
+  padding: 12px 18px 8px 18px;
+  vertical-align: middle; */
+  /* color: #fff;  */
+/* }  */
+nav {
+  display:block;
+  /* float: right; */
+}
+
+h1 {
+display: block;
+}
+
+input:last-child:hover { 
+  background-color: darkgray;
+
+}
+
+#cssAnimation {
+
+}
+
+#display-none{
+  display:none;
+}

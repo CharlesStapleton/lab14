@@ -5,7 +5,17 @@
 // Set up an empty cart for use on this page.
 var cart = new Cart([]);
 
-
+var linkTag = document.createElement('link');
+linkTag.setAttribute('href', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css');
+linkTag.setAttribute('rel', 'stylesheet');
+document.getElementsByTagName('head')['0'].appendChild(linkTag);
+console.log(document.getElementsByTagName('head')['0']);
+ var submitCSSAnimation = document.createElement('div');
+var cardFormDIV = document.getElementsByClassName('card')['1'];
+submitCSSAnimation.textContent = 'Item Added To Cart';
+submitCSSAnimation.setAttribute('id', 'display-none');
+console.log('SUBMIT CSS AN',submitCSSAnimation);
+cardFormDIV.appendChild(submitCSSAnimation);
 
 // On screen load, we call this method to put all of the busmall options
 // (the things in the Product.allProducts array) into the drop down list.
@@ -35,6 +45,7 @@ function handleSubmit(event) {
   cart.saveToLocalStorage();
   updateCounter();
   updateCartPreview();
+  renderCSSAnimation();
 }
 
 // TODO: Add the selected item and quantity to the cart
@@ -72,6 +83,32 @@ function updateCartPreview() {
   var cartLI = document.createElement('li');
   cartLI.textContent = `item(s): ${selectedCartItem} quantity: ${selectedCartQuantity}`;
   cartUL.appendChild(cartLI);
+}
+
+var catalogForm = document.getElementById('catalog');
+catalogForm.addEventListener('submit', handleSubmit);
+ 
+if (localStorage.cart) {
+  var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+  console.log(cartItems);
+  for (var i = 0; i < cartItems.length; i++) {
+    var cartLI = document.createElement('li');
+    cartLI.textContent = `item(s): ${cartItems[i].product} quantity: ${cartItems[i].quantity}`;
+    cartUL.appendChild(cartLI);
+  }
+}
+function addingDisplayNone () {
+  var addingBackAnimation;
+  addingBackAnimation = submitCSSAnimation.setAttribute('id','display-none');
+}
+
+function renderCSSAnimation(){
+  submitCSSAnimation.setAttribute('id', '');
+  // submitCSSAnimation.setAttribute('class', 'bounceInUp');
+  console.log('hitting renderCSS ANIMATION');
+  setInterval(function(){
+    submitCSSAnimation.setAttribute('id','display-none');
+  },1000);
 }
 
 // Set up the "submit" event listener on the form.
