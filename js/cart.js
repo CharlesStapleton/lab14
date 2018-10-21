@@ -52,13 +52,63 @@ function showCart() {
     var itemTD = document.createElement('td');
     itemTD.textContent = cart.items[i].product;
 
+    var img = document.createElement('img');
+
+    // Render product images
+    for (var j = 0; j < Product.allProducts.length; j++) {
+      if (cart.items[i].product === Product.allProducts[j].name) {
+        img.src = Product.allProducts[j].filePath;
+      }
+    }
+
     // Add the TR to the TBODY and each of the TD's to the TR
     tableBody.appendChild(tr);
 
     tr.appendChild(deleteTD);
     tr.appendChild(quantityTD);
     tr.appendChild(itemTD);
+    tr.appendChild(img);
   }
+  var cardForm = document.createElement('form');
+  cardForm.setAttribute('id', 'cardForm');
+  document.body.appendChild(cardForm);
+
+  var enterName = document.createElement('input');
+  enterName.setAttribute('type', 'text');
+  enterName.setAttribute('placeholder', 'Enter Name');
+
+  var enterStreet = document.createElement('input');
+  enterStreet.setAttribute('type', 'text');
+  enterStreet.setAttribute('placeholder', 'Enter Street');
+
+  var enterState = document.createElement('input');
+  enterState.setAttribute('type', 'text');
+  enterState.setAttribute('placeholder', 'Enter State');
+
+  var enterZip = document.createElement('input');
+  enterZip.setAttribute('type', 'number');
+  enterZip.setAttribute('placeholder', 'Enter Zip');
+
+  var enterPhone = document.createElement('input');
+  enterPhone.setAttribute('type', 'number');
+  enterPhone.setAttribute('placeholder', 'Enter Phone');
+
+  var enterCreditCard = document.createElement('input');
+  enterCreditCard.setAttribute('type', 'number');
+  enterCreditCard.setAttribute('placeholder', 'Enter Credit Card');
+
+  var buttonProcessOrder = document.createElement('button');
+  buttonProcessOrder.setAttribute('class', 'btn');
+  buttonProcessOrder.textContent = 'Process Order';
+
+  cardForm.appendChild(enterName);
+  cardForm.appendChild(enterStreet);
+  cardForm.appendChild(enterState);
+  cardForm.appendChild(enterZip);
+  cardForm.appendChild(enterPhone);
+  cardForm.appendChild(enterCreditCard);
+  cardForm.appendChild(buttonProcessOrder);
+
 }
 
 function removeItemFromCart(event) {
