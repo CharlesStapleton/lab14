@@ -5,6 +5,8 @@
 // Set up an empty cart for use on this page.
 var cart = new Cart([]);
 
+
+
 // On screen load, we call this method to put all of the busmall options
 // (the things in the Product.allProducts array) into the drop down list.
 function populateForm() {
@@ -77,6 +79,16 @@ function updateCartPreview() {
 // Call that handleSubmit method above and kick off the whole process
 var catalogForm = document.getElementById('catalog');
 catalogForm.addEventListener('submit', handleSubmit);
+
+if (localStorage.cart) {
+  var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+  console.log(cartItems);
+  for (var i = 0; i < cartItems.length; i++) {
+    var cartLI = document.createElement('li');
+    cartLI.textContent = `item(s): ${cartItems[i].product} quantity: ${cartItems[i].quantity}`;
+    cartUL.appendChild(cartLI);
+  }
+}
 
 // Before anything else of value can happen, we need to fill in the select
 // drop down list in the form.
